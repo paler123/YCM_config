@@ -25,6 +25,3 @@ For everything to work as intended without modification you'll need clang++ inst
 ```
 You can of course use it without compilation database (e.g. for quick "hello world" type of things) --> 
  stl headers will be found, some sane warnings set, workdir will be included.
-
-## License
-MIT
