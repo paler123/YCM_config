@@ -83,17 +83,10 @@ def IsHeaderFile( filename ):
   extension = os.path.splitext( filename )[ 1 ]
   return extension in [ '.H', '.h', '.hxx', '.hpp', '.hh' ]
 
-def is_public_header(header_file):
-    return os.path.basename(
-            os.path.abspath(
-             os.path.join(os.path.dirname(header_file), "../"))) == "include"
-
 # does nothing for private headers,
 # for public headers goes to the impl directory: see the project structure docs
 def find_matching_source_dir(header_file):
-    if is_public_header(header_file): # public headers in root/lib/include/lib
-        return os.path.join(os.path.dirname(header_file), "../../src")
-    return os.path.dirname(header_file)
+    return os.path.join(os.path.dirname(header_file), "../src")
 
 
 def GetCompilationInfoForFile( filename ):
