@@ -26,7 +26,7 @@ warnings = [
 # retrieves system includes from compiler
 def get_default_includes():
     magic_command = 'clang++ -E -x c++ - -v < /dev/null 2>&1  | egrep "^\s+\/" | sed -e "s/ //g"'
-    includes = ["-isystem" + include for include in
+    includes = ["-isystem" + str(include) for include in
                     subprocess.check_output(magic_command, shell=True).splitlines()]
     return includes
 
@@ -119,7 +119,7 @@ def FlagsForFile( filename, **kwargs ):
         compilation_info.compiler_flags_,
         compilation_info.compiler_working_dir_ )
       if(final_flags):
-        final_flags = final_flags[:1] + get_default_flags(filename) + final_flags[1:]
+        final_flags = final_flags[:1] + get_default_includes() + final_flags[1:]
   if not final_flags: # default the flags so that at least boost / stl works`
     final_flags = get_default_flags(filename)
   return {
